@@ -1,5 +1,3 @@
-from ultralytics import YOLO
-from ultralytics.data.utils import visualize_image_annotations
 from .dataloader import downloadClimbingHolds
 import os
 import cv2
