@@ -19,5 +19,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 downloadtest = "grader.src.dataloader:downloadClimbingHolds"
-modeltest = "grader.src.model:test"
+trainlocal = "grader.src.model:train"
 annotatetest = "grader.src.annotations:annotate1"
