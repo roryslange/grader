@@ -1,5 +1,4 @@
 from ultralytics import YOLO
-from PIL import ImageGrab
 
 def train():
     model = YOLO(model="yolov5s.pt")
