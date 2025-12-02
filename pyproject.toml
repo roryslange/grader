@@ -9,7 +9,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "kagglehub (>=0.3.13,<0.4.0)",
-    "ultralytics (>=8.3.230,<9.0.0)"
+    "ultralytics (>=8.3.230,<9.0.0)",
+    "psycopg2 (>=2.9.11,<3.0.0)",
+    "sqlalchemy (>=2.0.44,<3.0.0)"
 ]
 
 
