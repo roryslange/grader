@@ -6,7 +6,6 @@ import (
 
 type Hold struct {
 	gorm.Model
-	ID			uint
-	color 		string
-	hold_type 	string
+	Color 		string
+	HoldType 	string
 }

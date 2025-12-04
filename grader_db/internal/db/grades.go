@@ -6,6 +6,5 @@ import (
 
 type Grades struct {
 	gorm.Model
-	ID 		uint
-	grade 	string
+	Grade 	string
 }

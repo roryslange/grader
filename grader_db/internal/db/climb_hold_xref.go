@@ -6,9 +6,10 @@ import (
 
 type Climb_hold_xref struct {
 	gorm.Model
-	ID 			uint
-	climb 		Climb
-	hold 		Hold
-	is_start 	bool
-	is_end 		bool
+	ClimbID		uint
+	HoldID		uint
+	Climb 		Climb
+	Hold		Hold
+	IsStart 	bool
+	IsEnd		bool
 }

@@ -6,8 +6,9 @@ import (
 
 type Climb struct {
 	gorm.Model
-	ID 					uint
-	image 				Image
-	grade_real 			Grades
-	grade_generated 	Grades
+	Image 				Image
+	GradeRealID			uint
+	GradeGeneratedID	uint
+	GradeReal 			Grades
+	GradeGenerated 		Grades
 }
