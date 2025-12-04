@@ -1,4 +1,5 @@
 from ultralytics import YOLO
+import os
 
 def train():
     model = YOLO(model="yolov5s.pt")
@@ -10,3 +11,11 @@ def test():
     results = model(image)
     results[0].show()
     
+def testOnHolds():
+    cwd = os.getcwd()
+    model = YOLO(model="yolo11s.pt")
+    images_path = os.path.join(cwd, "grader/datasets/images/valid_images")
+    for i in range(3):
+        results = model(os.path.join(images_path, os.listdir(images_path)[i]))
+        results[0].show()
+        
