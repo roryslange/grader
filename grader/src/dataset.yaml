@@ -1,4 +1,4 @@
-path: ../grader/datasets
+path: ./grader/datasets
 
 train: images/train_images
 val: images/valid_images
