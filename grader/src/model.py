@@ -11,7 +11,7 @@ import os
 
 MODEL_PATH_DETECT_YOLO11N = os.curdir.join(["grader/models/yolo11n.pt"])
 MODEL_PATH_DETECT_YOLO11S = os.curdir.join(["grader/models/yolo11s.pt"])
-MODEL_PATH_POSE_YOLO11N = os.curdir.join(["grader/models/yolo11l-pose.pt"])
+MODEL_PATH_POSE_YOLO11N = os.curdir.join(["grader/models/yolo11s-pose.pt"])
 
 DATASET_YAML_PATH = "./grader/src/dataset.yaml"
 EPOCHS = 50
