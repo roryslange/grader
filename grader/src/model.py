@@ -9,8 +9,10 @@ import os
     yolov11n.pt (requires labels to be converted to bounding boxes)
 """
 
-MODEL_PATH_YOLO11N = os.curdir.join(["grader/models/yolo11n.pt"])
-MODEL_PATH_YOLO11S = os.curdir.join(["grader/models/yolo11s.pt"])
+MODEL_PATH_DETECT_YOLO11N = os.curdir.join(["grader/models/yolo11n.pt"])
+MODEL_PATH_DETECT_YOLO11S = os.curdir.join(["grader/models/yolo11s.pt"])
+MODEL_PATH_POSE_YOLO11N = os.curdir.join(["grader/models/yolo11l-pose.pt"])
+
 DATASET_YAML_PATH = "./grader/src/dataset.yaml"
 EPOCHS = 50
 IMG_SIZE = 640
@@ -20,7 +22,7 @@ BEST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/best.pt"])
 LAST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/last.pt"])
 
 def train():
-    model = YOLO(model=MODEL_PATH_YOLO11N)
+    model = YOLO(model=MODEL_PATH_DETECT_YOLO11S)
     model.train(data=DATASET_YAML_PATH, epochs=EPOCHS, imgsz=IMG_SIZE, batch=BATCH_SIZE, device=DEVICE)
     
 def testOnHolds():
@@ -31,3 +33,8 @@ def testOnHolds():
         results = model(os.path.join(images_path, os.listdir(images_path)[i]))
         results[0].show()
         
+def testOnPerson():
+    cwd = os.getcwd()
+    model = YOLO(model=MODEL_PATH_POSE_YOLO11N)
+    results = model(os.path.join(cwd, "meOnWall.jpeg"))
+    results[0].show()
