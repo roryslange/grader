@@ -11,7 +11,8 @@ dependencies = [
     "kagglehub (>=0.3.13,<0.4.0)",
     "ultralytics (>=8.3.230,<9.0.0)",
     "psycopg2 (>=2.9.11,<3.0.0)",
-    "sqlalchemy (>=2.0.44,<3.0.0)"
+    "sqlalchemy (>=2.0.44,<3.0.0)",
+    "fastapi (>=0.128.0,<0.129.0)"
 ]
 
 
@@ -25,3 +26,4 @@ trainlocal = "grader.src.model:train"
 annotatetest = "grader.src.annotations:annotate1"
 holdstest = "grader.src.model:testOnHolds"
 persontest = "grader.src.model:testOnPerson"
+apitest = "grader.services.model_service.main:main"
