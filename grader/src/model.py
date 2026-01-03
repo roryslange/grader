@@ -1,4 +1,5 @@
 from ultralytics import YOLO
+from huggingface_hub import login, upload_folder
 import os
 
 """
@@ -20,10 +21,13 @@ BATCH_SIZE = 16
 DEVICE = 0 # tbd refactor to use cpu if no gpu available
 BEST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/best.pt"])
 LAST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/last.pt"])
+MODEL_UPLOAD_PATH = os.curdir.join(["runs/detect/train6"])
 
 def train():
     model = YOLO(model=MODEL_PATH_DETECT_YOLO11S)
     model.train(data=DATASET_YAML_PATH, epochs=EPOCHS, imgsz=IMG_SIZE, batch=BATCH_SIZE, device=DEVICE)
+    login()
+    upload_folder(folder_path=MODEL_UPLOAD_PATH, repo_id="roryslange/grader", repo_type="model")
     
 def testOnHolds():
     cwd = os.getcwd()
