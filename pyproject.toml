@@ -13,7 +13,8 @@ dependencies = [
     "psycopg2 (>=2.9.11,<3.0.0)",
     "sqlalchemy (>=2.0.44,<3.0.0)",
     "fastapi (>=0.128.0,<0.129.0)",
-    "uvicorn (>=0.40.0,<0.41.0)"
+    "uvicorn (>=0.40.0,<0.41.0)",
+    "huggingface-hub (>=1.2.3,<2.0.0)"
 ]
 
 
