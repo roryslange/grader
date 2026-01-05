@@ -1,6 +1,7 @@
 from ultralytics import YOLO
 from huggingface_hub import login, upload_folder
 import os
+import cv2
 
 """
     tools for training yolo models
@@ -22,12 +23,11 @@ DEVICE = 0 # tbd refactor to use cpu if no gpu available
 BEST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/best.pt"])
 LAST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/last.pt"])
 MODEL_UPLOAD_PATH = os.curdir.join(["runs/detect/train6"])
+TEST_IMAGE_PATH = os.curdir.join(["meOnWall.jpeg"])
 
 def train():
     model = YOLO(model=MODEL_PATH_DETECT_YOLO11S)
     model.train(data=DATASET_YAML_PATH, epochs=EPOCHS, imgsz=IMG_SIZE, batch=BATCH_SIZE, device=DEVICE)
-    login()
-    upload_folder(folder_path=MODEL_UPLOAD_PATH, repo_id="roryslange/grader", repo_type="model")
     
 def testOnHolds():
     cwd = os.getcwd()
@@ -38,7 +38,17 @@ def testOnHolds():
         results[0].show()
         
 def testOnPerson():
-    cwd = os.getcwd()
-    model = YOLO(model=MODEL_PATH_POSE_YOLO11N)
-    results = model(os.path.join(cwd, "meOnWall.jpeg"))
-    results[0].show()
+    imagepath = os.curdir.join(["walktest.png"])
+    image = cv2.imread(imagepath)
+    pose_model = YOLO(model=MODEL_PATH_POSE_YOLO11N)
+    detect_model = YOLO(model="grader/models/yolo11n.pt")
+    pose_result = pose_model(image, verbose=False)
+    detect_result = detect_model(image, verbose=False)
+    
+    combined = image.copy()
+    combined = pose_result[0].plot(img=combined)
+    combined = detect_result[0].plot(img=combined)
+        
+    cv2.imshow("output", combined)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
