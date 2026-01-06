@@ -52,3 +52,11 @@ def testOnPerson():
     cv2.imshow("output", combined)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    
+def uploadModels():
+    pose_model = YOLO(model=MODEL_PATH_POSE_YOLO11N)
+    detect_model = YOLO(model="grader/models/yolo11n.pt")
+    pose_export_path = pose_model.export(format='onnx')
+    detect_export_path = detect_model.export(format='onnx')
+    login()
+    upload_folder(folder_path=os.curdir.join(["grader/models"]), repo_id="roryslange/grader", repo_type="model")
