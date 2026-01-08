@@ -24,6 +24,7 @@ BEST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/best.pt"])
 LAST_WEIGHTS_PATH = os.curdir.join(["runs/detect/train6/weights/last.pt"])
 MODEL_UPLOAD_PATH = os.curdir.join(["runs/detect/train6"])
 TEST_IMAGE_PATH = os.curdir.join(["meOnWall.jpeg"])
+MODEL_TEST_HOLDS = os.curdir.join(["grader/models/test-holds.pt"])
 
 def train():
     model = YOLO(model=MODEL_PATH_DETECT_YOLO11S)
@@ -31,17 +32,17 @@ def train():
     
 def testOnHolds():
     cwd = os.getcwd()
-    model = YOLO(model=BEST_WEIGHTS_PATH)
+    model = YOLO(model=MODEL_TEST_HOLDS)
     images_path = os.path.join(cwd, "grader/datasets/images/valid_images")
     for i in range(3):
         results = model(os.path.join(images_path, os.listdir(images_path)[i]))
         results[0].show()
         
 def testOnPerson():
-    imagepath = os.curdir.join(["walktest.png"])
+    imagepath = os.curdir.join(["meOnWall.jpeg"])
     image = cv2.imread(imagepath)
     pose_model = YOLO(model=MODEL_PATH_POSE_YOLO11N)
-    detect_model = YOLO(model="grader/models/yolo11n.pt")
+    detect_model = YOLO(model=MODEL_TEST_HOLDS)
     pose_result = pose_model(image, verbose=False)
     detect_result = detect_model(image, verbose=False)
     
